@@ -5,13 +5,15 @@
 Extending Shrock's open-ladder formula (2000, equations (5.1)-(5.6)) and Yurishchev's double-chain block (2001, equation (9)), an exact defect-counting transfer proves R. H. Hardin's empirical recurrence in OEIS A229634, Formula, revision 9 (27 April 2021; first posted 27 September 2013), for every n >= 21. Its order eighteen and its starting index are sharp. The same construction proves every displayed row and column recurrence of the companion table A229637, with minimal eventual orders and sharp starting indices. A general defect-budget argument explains the cubed denominators. The two-column formulas of Colin Barker and the three- and four-column generating functions of R. J. Mathar and Barker follow as well.
 
 - PDF: [frozen public file](paper.pdf)
+- DOI: [https://doi.org/10.5281/zenodo.24497440](https://doi.org/10.5281/zenodo.24497440)
+- Concept DOI: [https://doi.org/10.5281/zenodo.24497439](https://doi.org/10.5281/zenodo.24497439)
 - License: CC-BY-4.0
 - Version: 2
 - Mathesis record: [hardin229634-defective-colourings](https://mathesis-omega-research.apps.chrono-ai.fun/papers/hardin229634-defective-colourings?version=2)
 
 ## How to cite
 
-Haobo Ma, Wenlin Zhang (2026). Extensions of Shrock's and Yurishchev's formulas to Hardin's defective-colouring recurrences. Mathesis, version 2. https://mathesis-omega-research.apps.chrono-ai.fun/papers/hardin229634-defective-colourings?version=2
+Haobo Ma, Wenlin Zhang (2026). Extensions of Shrock's and Yurishchev's formulas to Hardin's defective-colouring recurrences. Mathesis, version 2. https://doi.org/10.5281/zenodo.24497440
 
 ## Statement progress
 

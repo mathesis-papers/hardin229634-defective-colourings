@@ -1,0 +1,26 @@
+{
+  "id": "hardin229634-defective-colourings",
+  "revision": 2,
+  "problem_ids": [
+    "hardin229634",
+    "hardin229632",
+    "hardin229633",
+    "hardin229638"
+  ],
+  "topic": "Hardin's empirical fixed-strip recurrences for canonical three-colour arrays with exactly two monochromatic horizontal or diagonal bonds",
+  "title": "Extensions of Shrock's and Yurishchev's formulas to Hardin's defective-colouring recurrences",
+  "creators": [
+    {
+      "name": "Ma, Haobo",
+      "affiliation": "ChronoAI Pte Ltd, Singapore"
+    },
+    {
+      "name": "Zhang, Wenlin",
+      "affiliation": "National University of Singapore; ChronoAI Pte Ltd, Singapore"
+    }
+  ],
+  "abstract": "Extending Shrock's open-ladder formula (2000, equations (5.1)-(5.6)) and Yurishchev's double-chain block (2001, equation (9)), an exact defect-counting transfer proves R. H. Hardin's empirical recurrence in OEIS A229634, Formula, revision 9 (27 April 2021; first posted 27 September 2013), for every n >= 21. Its order eighteen and its starting index are sharp. The same construction proves every displayed row and column recurrence of the companion table A229637, with minimal eventual orders and sharp starting indices. A general defect-budget argument explains the cubed denominators. The two-column formulas of Colin Barker and the three- and four-column generating functions of R. J. Mathar and Barker follow as well.",
+  "summary": "A proof of Hardin's five-column recurrence and all displayed companion recurrences, with sharp ranges, least eventual orders, and a general defect-budget denominator theorem. The two-column and two-row cases are derived from earlier formulas of Shrock (2000) and Yurishchev (2001); the related zero-defect formula of Barker is also proved.",
+  "license": "cc-by-4.0",
+  "evidence_url": "https://github.com/the-omega-institute/trureturing/blob/9849c0d81bfe0a953a10ad37400f5b1b61f028b5/D5/S3/StatisticalMechanics/Potts/CrossedStripDefectsWide/HardinA229634Strip.lean"
+}

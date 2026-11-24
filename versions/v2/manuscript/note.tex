@@ -1,0 +1,268 @@
+\documentclass[11pt]{article}
+\usepackage[a4paper,margin=25mm]{geometry}
+\usepackage{amsmath,amssymb,amsthm,booktabs,array}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[hidelinks]{hyperref}
+\newtheorem{theorem}{Theorem}
+\newtheorem{corollary}[theorem]{Corollary}
+\newcommand{\ind}{\mathbf{1}}
+\title{Extensions of Shrock's and Yurishchev's formulas\protect\\to Hardin's defective-colouring recurrences}
+\author{Haobo Ma\thanks{ChronoAI Pte Ltd, Singapore.}\and
+Wenlin Zhang\thanks{National University of Singapore; ChronoAI Pte Ltd, Singapore.}}
+\date{19 November 2026}
+\begin{document}
+\maketitle
+\begin{abstract}
+Extending Shrock's open-ladder formula (2000,
+Eqs.~(5.1)--(5.6) \cite{shrock}) and Yurishchev's double-chain block
+(2001, Eq.~(9) \cite{yurishchev}), an exact defect-counting transfer
+proves R. H. Hardin's empirical recurrence in OEIS A229634, Formula,
+revision 9 (27 April 2021; first posted 27 September 2013),
+for every $n\geq21$.
+Its order eighteen and its starting index are sharp.
+The same construction proves every displayed row and column recurrence
+of the companion table A229637, with minimal eventual orders and sharp
+starting indices. A general defect-budget argument explains the cubed
+denominators. The two-column formulas of Colin Barker and the
+three- and four-column generating functions of R. J. Mathar and Barker
+follow as well.
+\end{abstract}
+
+\section{The count and the recurrence}
+An $n\times k$ array has entries in $\{0,1,2\}$.
+Its bonds join horizontally consecutive cells in a row, and diagonally
+consecutive cells in consecutive rows, in both diagonal directions.
+There are no vertical bonds. A mistake is a bond whose endpoints have
+the same colour. Colours are introduced in row-major order: the first
+colour is $0$, and the first occurrence of a new colour uses the smallest
+unused label. Write $a_k(n)$ for the number of such canonical arrays
+with exactly two mistakes, and put $a(n)=a_5(n)$.
+This is Hardin's A229634, the fifth column of A229637
+\cite{hardin5,hardintable}. In particular, the source calls the proposed
+formula ``Empirical'', rather than a proved recurrence.
+
+Define $c_0,\ldots,c_{17}$, in increasing order of the lagged index, by
+\begin{equation}\label{eq:coefficients}
+\begin{split}
+(c_0,\ldots,c_{17})={}&(8,-228,2598,-14887,42804,-40719,\\
+&-84933,243513,-118011,-230994,305043,-55215,\\
+&-116010,94839,-33687,6569,-723,42).
+\end{split}
+\end{equation}
+\begin{theorem}\label{thm:main}
+For every integer $n\geq21$,
+\begin{equation}\label{eq:recurrence}
+a(n)=\sum_{j=0}^{17}c_j a(n-18+j).
+\end{equation}
+This is exactly the recurrence in the Formula field of A229634.
+\end{theorem}
+
+We prove the theorem by a finite vector identity and a propagation
+argument. The identity is stronger than agreement of a finite list of
+terms: it holds for the whole distribution of the last row and unused
+defect budget.
+
+\section{An exact transfer proof}
+Let $R_k=\{0,1,2\}^k$. For rows $p,r\in R_k$, define
+\[
+h(r)=\sum_{i=1}^{k-1}\ind_{r_i=r_{i+1}},\qquad
+b(p,r)=\sum_{i=1}^{k-1}
+  (\ind_{p_i=r_{i+1}}+\ind_{p_{i+1}=r_i}).
+\]
+Thus $h$ counts horizontal mistakes and $b$ counts mistakes between
+two adjacent rows. Use states $(r,d)\in R_k\times\{0,1,2\}$, where $d$
+is the remaining number of mistakes. The integer matrix $M_k$ is
+defined by
+\[
+(M_k)_{(p,d),(r,e)}=
+\begin{cases}
+1,&e=d-h(r)-b(p,r)\ \text{and}\ e\geq0,\\
+0,&\text{otherwise}.
+\end{cases}
+\]
+Let $w_0$ be the row vector with
+$w_0(r,d)=\ind_{d=2-h(r)}$, and set $w_t=w_0M_k^t$.
+Finally, let $v(r,d)=\ind_{d=0}$ be a column vector.
+The scalar $L_k(n)=w_{n-1}v$ counts all labelled arrays with exactly
+two mistakes. Indeed, initialization charges the first row's horizontal
+bonds, each transition charges precisely the newly added horizontal and
+diagonal bonds, and $v$ accepts precisely the exhausted budgets.
+This gives a bijection between counted arrays and accepted paths;
+budgets never increase, so no rejected path can later become admissible.
+
+For $k=5$, every counted array is nonconstant. A constant array would
+have $4n+8(n-1)=12n-8$ mistakes, which is never two.
+A nonconstant array uses at least two colours, so its stabilizer under
+the six colour permutations is trivial. Each orbit has exactly one
+row-major canonical representative, obtained by relabelling colours
+in their order of first occurrence. Consequently
+\begin{equation}\label{eq:orbit}
+L_5(n)=6a(n)\qquad(n\geq1).
+\end{equation}
+
+For the explicit matrix and vector above, the finite identity is
+\begin{equation}\label{eq:vector}
+w_{20}=\sum_{j=0}^{17}c_j w_{2+j}\qquad(k=5).
+\end{equation}
+Here is a complete specification of its exact-arithmetic calculation.
+Order the rows lexicographically, order the remaining budgets as $0,1,2$,
+initialize $w_0$ as above, and repeat
+\[
+w_{t+1}(r,e)=
+\sum_{\substack{p\in R_5,\ d\in\{0,1,2\}\\
+ e=d-h(r)-b(p,r)\geq0}} w_t(p,d)
+\quad(0\leq t<20).
+\]
+Subtract the right side of \eqref{eq:vector} coordinate by coordinate;
+every resulting integer is zero. The accompanying \texttt{verify.py}
+implements precisely these sums, with integer arithmetic and no
+preassigned transition table. Its output gives the coefficient list,
+the initial scalar values, and the finite identities used here.
+
+Multiplication of \eqref{eq:vector} by $M_5^m v$, for any $m\geq0$,
+gives
+\[
+L_5(21+m)=\sum_{j=0}^{17}c_jL_5(3+j+m).
+\]
+Dividing by six using \eqref{eq:orbit} proves Theorem~\ref{thm:main}.
+\qed
+
+\section{The generating function and optimal order}
+Put $a(0)=0$ and $A(z)=\sum_{n\geq0}a(n)z^n$. Define
+\[
+Q(z)=(1-14z+45z^2-15z^3-36z^4+19z^5-2z^6)^3.
+\]
+Expansion gives $Q(z)=1-\sum_{j=0}^{17}c_jz^{18-j}$.
+The initial transfer values and Theorem~\ref{thm:main} give
+\begin{equation}\label{eq:gf}
+A(z)=\frac{P(z)}{Q(z)},\qquad
+P(z)=\sum_{i=1}^{20}p_i z^i,
+\end{equation}
+where the coefficients are
+\begin{center}
+\begin{tabular}{rr@{\qquad}rr@{\qquad}rr@{\qquad}rr}
+\toprule
+$i$&$p_i$&$i$&$p_i$&$i$&$p_i$&$i$&$p_i$\\
+\midrule
+1&12&6&2954875&11&2209941&16&$-1304212$\\
+2&$-16$&7&$-5909268$&12&11838704&17&320998\\
+3&$-5789$&8&2800838&13&$-8530008$&18&$-42652$\\
+4&98314&9&10098304&14&$-59389$&19&2920\\
+5&$-740730$&10&$-16241498$&15&2512320&20&$-80$\\
+\bottomrule
+\end{tabular}
+\end{center}
+For completeness, the computation of each coefficient is simply
+$p_i=\sum_{\ell=0}^{\min(i,18)}[z^\ell]Q(z)\,a(i-\ell)$;
+all higher coefficients vanish by the recurrence.
+
+\begin{corollary}\label{cor:minimal}
+The least order of an eventual rational constant-coefficient recurrence
+for $a(n)$ is eighteen. Equation~\eqref{eq:recurrence} fails at $n=20$.
+\end{corollary}
+\begin{proof}
+The polynomials $P$ and $Q$ are coprime. One finite certificate is their
+Euclidean algorithm modulo $101$: the successive nonzero remainder
+degrees are $17,16,\ldots,0$, with last constant $63$.
+Both leading coefficients remain nonzero modulo $101$.
+Hence their resultant is nonzero modulo $101$, and therefore nonzero
+over $\mathbb Q$. These polynomial computations are also explicit in
+\texttt{verify.py}.
+If an eventual recurrence has denominator polynomial $D(z)$, then
+$D(z)A(z)$ is a polynomial. Equation~\eqref{eq:gf} and coprimality
+imply $Q\mid D$, so its order is at least $\deg Q=18$.
+Theorem~\ref{thm:main} attains this order.
+Finally, $[z^{20}]Q(z)A(z)=p_{20}=-80\ne0$, which is exactly the
+residual $a(20)-\sum_{j=0}^{17}c_j a(2+j)$.
+\end{proof}
+
+\input{companions}
+
+The pinned Lean declaration
+\href{https://github.com/the-omega-institute/trureturing/blob/9849c0d81bfe0a953a10ad37400f5b1b61f028b5/D5/S3/StatisticalMechanics/Potts/CrossedStripDefectsWide/HardinA229634Strip.lean}{\texttt{HardinA229634Strip.result}}
+states the recurrence for the literal canonical count as
+$a(n+21)=\sum_{j=0}^{17}c_j a(n+3+j)$ for every natural $n$.
+The pinned declarations
+\href{https://github.com/the-omega-institute/trureturing/blob/9849c0d81bfe0a953a10ad37400f5b1b61f028b5/D5/S3/StatisticalMechanics/Potts/CrossedStripDefects/HardinA229632Strip.lean}{\texttt{HardinA229632Strip.result}}
+and
+\href{https://github.com/the-omega-institute/trureturing/blob/9849c0d81bfe0a953a10ad37400f5b1b61f028b5/D5/S3/StatisticalMechanics/Potts/CrossedStripDefects/HardinA229633Strip.lean}{\texttt{HardinA229633Strip.result}}
+state the literal width-three and width-four recurrences for $n\geq8$
+and $n\geq10$, respectively. The generating functions, optimal orders,
+boundary residuals, general budget theorem and other companion results
+have the written proofs and exact finite checks specified here;
+they are separate from these declarations' scope.
+The pinned declaration
+\href{https://github.com/the-omega-institute/trureturing/blob/9849c0d81bfe0a953a10ad37400f5b1b61f028b5/D5/S3/StatisticalMechanics/Potts/StripDefects/HardinA229638Strip.lean}{\texttt{HardinA229638Strip.result}}
+states precisely the two-row recurrence for $k\geq7$; its generating
+function and optimality assertions have the separate proofs above.
+
+\begin{thebibliography}{99}
+\bibitem{hardin5}
+R. H. Hardin, \emph{Number of defective 3-colorings of an $n\times5$
+0..2 array connected horizontally, diagonally and antidiagonally with
+exactly two mistakes, and colors introduced in row-major 0..2 order},
+OEIS A229634, 27 September 2013, revision 9, 27 April 2021.
+\url{https://oeis.org/A229634}.
+
+\bibitem{hardintable}
+R. H. Hardin, \emph{Defective 3-colorings of an $n\times k$ array
+with exactly two mistakes}, OEIS A229637, 27 September 2013,
+revision 8, 27 April 2021. \url{https://oeis.org/A229637}.
+
+\bibitem{sloane}
+N. J. A. Sloane, \emph{$a(n)=2^{n-2}\binom{n+1}{2}$},
+OEIS A052482, 16 March 2000; Name and Formula, revision 20,
+28 September 2025, including contributions of C. Barker
+(22 September 2017) and A. Eldar (28 September 2025).
+\url{https://oeis.org/A052482}.
+
+\bibitem{widthtwo}
+R. H. Hardin, OEIS A229600, 26 September 2013;
+C. Barker, conjectures in Formula, 16 March 2018.
+\url{https://oeis.org/A229600}.
+
+\bibitem{widththree}
+R. H. Hardin, OEIS A229632, 27 September 2013;
+R. J. Mathar, empirical generating function in Formula, 29 September 2013.
+\url{https://oeis.org/A229632}.
+
+\bibitem{widthfour}
+R. H. Hardin, OEIS A229633, 27 September 2013;
+C. Barker, empirical generating function in Formula, 20 September 2018.
+\url{https://oeis.org/A229633}.
+
+\bibitem{salassokal}
+J. Salas and A. D. Sokal, \emph{Transfer matrices and partition-function zeros
+for antiferromagnetic Potts models. I. General theory and square-lattice
+chromatic polynomial}, J. Statist. Phys. \textbf{104} (2001), 609--699,
+\href{https://doi.org/10.1023/A:1010376605067}{doi:10.1023/A:1010376605067};
+\href{https://arxiv.org/abs/cond-mat/0004330v2}{arXiv:cond-mat/0004330v2}, Section 3.
+\bibitem{shrock}
+R. Shrock, \emph{Exact Potts model partition functions on ladder graphs},
+Physica A \textbf{283} (2000), 388--446,
+\href{https://doi.org/10.1016/S0378-4371(00)00109-6}{doi:10.1016/S0378-4371(00)00109-6};
+\href{https://arxiv.org/abs/cond-mat/0001389v1}{arXiv:cond-mat/0001389v1},
+Section V, Eqs.~(5.1)--(5.6), printed pp.~22--23.
+
+\bibitem{yurishchev}
+M. A. Yurishchev, \emph{Double Potts chain and exact results for some
+two-dimensional spin models}, J. Exp. Theor. Phys. \textbf{93} (2001),
+1113--1118, \href{https://doi.org/10.1134/1.1427183}{doi:10.1134/1.1427183};
+\href{https://arxiv.org/abs/cond-mat/0111401v1}{arXiv:cond-mat/0111401v1},
+Section 2, Eqs.~(5), (8), (9), printed pp.~4--5.
+
+\bibitem{rowtwo}
+R. H. Hardin, OEIS A229638, 27 September 2013;
+C. Barker, empirical generating function in Formula, 20 September 2018.
+\url{https://oeis.org/A229638}.
+
+\bibitem{zerowidthfive}
+R. H. Hardin, OEIS A232917, 2 December 2013;
+C. Barker, empirical generating function in Formula, 6 October 2018.
+\url{https://oeis.org/A232917}.
+\end{thebibliography}
+\noindent\small\copyright\ 2026 Haobo Ma and Wenlin Zhang.
+Licensed under Creative Commons Attribution 4.0 International
+(CC BY 4.0).
+\end{document}

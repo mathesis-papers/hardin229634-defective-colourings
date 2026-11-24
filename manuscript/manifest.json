@@ -1,0 +1,44 @@
+{
+  "files": [
+    {
+      "name": "README.md",
+      "sha256": "c1179e5fb2f2e7d6b03c92b78c5236b9dec0dca61830480c2a395662d623e830",
+      "bytes": 4344
+    },
+    {
+      "name": "note.tex",
+      "sha256": "63ab9cfb4dfa73460bf8add2e202f38d794e553748305356b9978fe85607c1bf",
+      "bytes": 11862
+    },
+    {
+      "name": "companions.tex",
+      "sha256": "3f237508fa35d52f860b549da48e2fc548d3d498facf33d4d2fc2ef4090beaa9",
+      "bytes": 11775
+    },
+    {
+      "name": "metadata.json",
+      "sha256": "97aa5bcdf539881933aac97930ed5008e4e653fbb773ec9de7bee8c07314d010",
+      "bytes": 1987
+    },
+    {
+      "name": "verify.py",
+      "sha256": "d9241fb3688f2bc11ff7736648acdcb7edfbbec2e66d97fed63c7ef73c1c437f",
+      "bytes": 8344
+    },
+    {
+      "name": "verify_siblings.py",
+      "sha256": "303a4454473f120d698ac8831005bf021199bde2c1db3b0b52b09cd435a90947",
+      "bytes": 11646
+    },
+    {
+      "name": "checker-output.json",
+      "sha256": "377a576a5d69104c660feeb4b722f01a45cf234ca5b6a634bab95e69d82f1a41",
+      "bytes": 2813
+    },
+    {
+      "name": "sibling-output.json",
+      "sha256": "3553a2bb7cd5715d82cb72a6f8f9266f72b184bbfb91d95075f2c267d821a196",
+      "bytes": 38285
+    }
+  ]
+}

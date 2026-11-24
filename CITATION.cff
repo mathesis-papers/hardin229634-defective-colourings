@@ -1,0 +1,10 @@
+cff-version: 1.2.0
+message: "If you use this work, cite it."
+title: "Extensions of Shrock's and Yurishchev's formulas to Hardin's defective-colouring recurrences"
+authors:
+  - name: "Haobo Ma"
+  - name: "Wenlin Zhang"
+date-released: "2026-11-24"
+version: "2"
+url: "https://mathesis-omega-research.apps.chrono-ai.fun/papers/hardin229634-defective-colourings?version=2"
+license: "CC-BY-4.0"

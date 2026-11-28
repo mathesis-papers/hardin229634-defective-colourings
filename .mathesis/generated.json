@@ -36,9 +36,9 @@
     "manuscript/sibling-output.json": "3553a2bb7cd5715d82cb72a6f8f9266f72b184bbfb91d95075f2c267d821a196",
     "manuscript/verify.py": "d9241fb3688f2bc11ff7736648acdcb7edfbbec2e66d97fed63c7ef73c1c437f",
     "manuscript/verify_siblings.py": "303a4454473f120d698ac8831005bf021199bde2c1db3b0b52b09cd435a90947",
-    "paper.json": "25fdd79b7c693ca930c03f76c616361ff20611457f4d6e56f57525e2ea277479",
+    "paper.json": "1e896bdaecdb31584a2c4d46983a0975723b8ac6d775fcb9d1e38bcf290ebea3",
     "paper.pdf": "bda7653e6792060080babb5f63767506dac5c31e709176bce89d9671b7a03b27",
     "source.archive": "eda963e726cf542390ada32a2f011c99eec81171421c5b213c3dbbc3fee899a3"
   },
-  "snapshot_identity": "5f5c4b1f0c52df597cfc428df63ebf72cd6f3503aa848eac13ed3f96fb1dc689"
+  "snapshot_identity": "d9d03bfbee96ad6c2b68940c710bf01174deba8b0067628476564626e57002e7"
 }
